@@ -67,33 +67,44 @@ void sendNumArray()
   char fou[10];
   char fve[10];
 
-  char e[] = "<";
+  char e[] = "#";
   char f[] = ">";
   
-  char sendNums[50];
+  char sendNums[60];
   itoa(functionOne(), one, 10);
   itoa(functionTwo(),two, 10);
   itoa(functionThree(),thr, 10);
   itoa(functionFour(),fou, 10);
   itoa(functionFive(),fve, 10);
-  
+
+  char chicken[60];
 //  strcpy(sendNums, one);
-  strcpy(sendNums, e);
-  strcat(sendNums, one);
-  strcat(sendNums, ",");
-  strcat(sendNums, two);
-  strcat(sendNums, ",");
-  strcat(sendNums, thr);
-  strcat(sendNums, ",");
-  strcat(sendNums, fou);
-  strcat(sendNums, ",");
-  strcat(sendNums, fve);
-  strcat(sendNums, f);
-  strcat(sendNums,"\r\n");
+  strcpy(chicken, e);
+  strcat(chicken, one);
+  strcat(chicken, ",");
+  strcat(chicken, two);
+  strcat(chicken, ",");
+  strcat(chicken, thr);
+  strcat(chicken, ",");
+  strcat(chicken, fou);
+  strcat(chicken, ",");
+  strcat(chicken, fve);
+//  strcat(sendNums, f);
+//  strcat(sendNums,"\r\n");
+
+//  char chicken[40];
+//  strcpy(chicken, "danelle");
+  strcat(chicken, "\r\n");
 
 //  HC12.print("#");
-  HC12.print(sendNums);
-  Serial.println(sendNums);
+  HC12.print(chicken);
+//  HC12.print("\r\n");
+//  HC12.print("\r");
+//  HC12.print("\n");
+//  delay(1000);
+//  HC12.print(chicken);
+//  delay(1000);
+//  Serial.println(sendNums);
 //  delay(100);
 }
 

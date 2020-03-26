@@ -6,10 +6,17 @@ SoftwareSerial HC12(10, 11); // HC-12 TX Pin, HC-12 RX Pin
 
 int ndx = 0;
 
-char ssid[] = "\"MW41NF_6C08\"";
-char password[] = "\"00830131\"";
+//char ssid[] = "\"MW41NF_6C08\"";
+//char password[] = "\"00830131\"";
+//
+//char server[] = "192.168.1.108";
 
-char server[] = "192.168.1.108";
+char ssid[] = "\"MonaConnect\"";
+char password[] = "\"\"";
+
+char server[] = "172.16.189.129";
+
+
 char port[] = "3000";
 
 char data[50];
@@ -27,30 +34,35 @@ void setup() {
   delay(3000);
   espSetup();
   delay(3000);
+  delay(1000);
   digitalWrite(setupLED, LOW);
+  Serial.println("SETUP");
 }
 
 void loop() {
   receiveNumArray();
 }
 
+void flushSerial() {
+  while (HC12.available())
+    HC12.read();
+}
+
 void receiveNumArray()
 {
-  boolean fin = false;
-  int receivedChars[] = {0, 0, 0, 0};
-  int n = 0;
-  HC12.listen();
-  char val[30];
-  while (HC12.available() > 0) { //was while
+  //  Serial.println(F("RECEIVE"));
+//  HC12.listen();
+//  while (HC12.available() > 0) {
     char data[50];
-    readline(data, 150, 0);
+    //flushSerial();
+    readline(data, 50, 0);
     Serial.println("START");
     Serial.println(data);
     Serial.println("STOP");
-
-    HC12.end();
+//  }
+//    HC12.end();
     delay(2000);
-    
+
     esp8266.listen();
     delay(2000);
     Serial.println("--------------UPDATE SERVER--------------");
@@ -59,10 +71,10 @@ void receiveNumArray()
     Serial.println("Server updated");
     analogWrite(serverLED, 0);
     Serial.println("Done");
-    while(1);
-//    esp8266.end();
-//    delay(2000);
-  }
+    //    while(1);
+    esp8266.end();
+    delay(2000);
+//  }
 }
 
 /********SETUP ESP WITH AT COMMANDS**********/
@@ -107,6 +119,8 @@ String esp8266Serial(String command, const int timeout, boolean debug)
 
 uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout)
 {
+  Serial.println("READLINE");
+  HC12.listen();
   uint16_t buffidx = 0;
   boolean timeoutvalid = true;
   if (timeout == 0) timeoutvalid = false;
@@ -120,6 +134,7 @@ uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout)
 
     while (HC12.available())
     {
+      //      Serial.println("c=HC12.read()");
       char c =  HC12.read();
       //Serial.print(c, HEX); Serial.print("#"); Serial.println(c);
 
@@ -139,12 +154,13 @@ uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout)
 
     if (timeoutvalid && timeout == 0)
     {
-      //Serial.println(F("TIMEOUT"));
+      Serial.println(F("TIMEOUT"));
       break;
     }
     delay(1);
   }
   buff[buffidx] = 0;  // null term
+  HC12.end();
   return buffidx;
 }
 

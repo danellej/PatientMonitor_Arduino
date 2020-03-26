@@ -17,7 +17,7 @@ int tempPin = A2;
 
 unsigned long settleHRM;
 
-char deviceID[] = "9";
+char deviceID[] = "6";
 
 void heartRateSensorSetup() {
   particleSensor.begin(Wire, I2C_SPEED_FAST); //Use default I2C port, 400kHz speed
@@ -60,7 +60,7 @@ void sendNumArray()
 //  char e[] = "<";
 //  char f[] = ">";
 
-  char sendNums[50];
+  char chicken[60];
   dtostrf((double)temperature(), 4, 2, tmp); //try sprintf(tmp,"%4.2f", temperature());
   itoa(accelerometer(), acc, 10);
   itoa(heartRate(), heart, 10);
@@ -68,20 +68,22 @@ void sendNumArray()
   itoa(functionFive(), fve, 10);
 //  itoa(deviceID, devID, 10);
 
-  strcpy(sendNums, deviceID);
-  strcat(sendNums, ",");
-  strcat(sendNums, tmp);
-  strcat(sendNums, ",");
-  strcat(sendNums, acc);
-  strcat(sendNums, ",");
-  strcat(sendNums, heart);
-  strcat(sendNums, ",");
-  strcat(sendNums, fou);
-//  strcat(sendNums, f);
-  strcat(sendNums, "\r\n");
+  strcpy(chicken, deviceID);
+  strcat(chicken, ",");
+  strcat(chicken, tmp);
+  strcat(chicken, ",");
+  strcat(chicken, acc);
+  strcat(chicken, ",");
+  strcat(chicken, heart);
+  strcat(chicken, ",");
+  strcat(chicken, fou);
+//  strcat(chicken, f);
+//  strcat(chicken, "\r\n");
 
-  HC12.println(sendNums);
-  Serial.println(sendNums);
+  HC12.print(chicken);
+  delay(100);
+  HC12.print("\r\n");
+//  Serial.println(chicken);
   //  delay(100);
 }
 
