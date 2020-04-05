@@ -1,12 +1,12 @@
 #include <SoftwareSerial.h>
 
-SoftwareSerial HC12SS = SoftwareSerial(10,11);
+SoftwareSerial HC12SS = SoftwareSerial(10, 11);
 SoftwareSerial *HC12 = &HC12SS;
 
-SoftwareSerial espSS = SoftwareSerial(2,3);
+SoftwareSerial espSS = SoftwareSerial(2, 3);
 SoftwareSerial *esp = &espSS;
 
-uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout=0);
+uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout = 0);
 
 #define DEBUG true
 
@@ -23,9 +23,9 @@ void setup() {
 }
 
 void loop() {
-  char line[150];
+  char line[50];
 
-  readline(line, 150);
+  readline(line, 50);
 
   updateServer(line);
 }
@@ -80,7 +80,7 @@ uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout)
 void updateServer(char* data)
 {
   esp->begin(9600);
-  char body[200];
+  char body[70];
   strcpy(body, "{\"data\":\"");
   strcat(body, data);
   strcat(body, "\"}");
@@ -89,7 +89,7 @@ void updateServer(char* data)
   itoa(bodySize, bodySizeString , 10);
 
   Serial.print(F("Body: ")); Serial.println(body);
-  char request[200];
+  char request[160];
   strcpy(request, "POST /patient/parse\r\nHost: "); //route after post /
   strcat(request, server);
   strcat(request, ":");
@@ -109,18 +109,24 @@ void updateServer(char* data)
   strcat(cipsend, requestLengthStr);
   strcat(cipsend, "\r\n");
 
-  char cipstart[100];
+  char cipstart[40];
   strcpy(cipstart, "AT+CIPSTART=\"TCP\",\"");
   strcat(cipstart, server);
   strcat(cipstart, "\",");
   strcat(cipstart, port);
   strcat(cipstart, "\r\n");
-  esp8266Serial(cipstart, 5000, DEBUG);
-  delay(5000);
+  Serial.println("-----CIPSTART--------");
+  esp8266Serial(cipstart, 1000, DEBUG);
+  delay(500);
 
-  esp8266Serial(cipsend, 1000, DEBUG);
+  Serial.println("-----CIPSEND--------");
+  Serial.println(cipsend);
+  esp8266Serial(cipsend, 200, DEBUG);
+  delay(100);
 
-  esp8266Serial(request, 1000, DEBUG);
+  Serial.println("-----REQUEST--------");
+  esp8266Serial(request, 10000, DEBUG);
+  delay(100);
   esp->end();
 }
 
