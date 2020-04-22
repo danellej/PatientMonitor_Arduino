@@ -13,7 +13,7 @@ uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout = 0);
 char ssid[] = "\"Delford-PC_Network\"";
 char password[] = "\"dv8d-dy5r-pj16\"";
 
-char server[] = "192.168.1.135";
+char server[] = "192.168.1.106";
 
 char port[] = "3000";
 
@@ -27,7 +27,8 @@ void loop() {
 
   readline(line, 50);
 
-  updateServer(line);
+//  updateServer(line);
+Serial.println(line);
 }
 
 uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout)
@@ -168,6 +169,16 @@ String esp8266Serial(String command, const int timeout, boolean debug)
   if (debug)
   {
     Serial.print(response);
+    if(response.indexOf("+IPD") == 31){
+      Serial.println("---------RESPONSE RECEIVED----------");
+    }
   }
   return response;
+}
+
+void checkResponse(String a) {
+  if ((a.indexOf("+IPD") != -1)){
+    delay(1000);
+    Serial.println("---------RESPONSE RECEIVED----------");
+  }
 }
