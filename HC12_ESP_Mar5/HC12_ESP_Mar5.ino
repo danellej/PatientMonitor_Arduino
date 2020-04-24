@@ -13,7 +13,7 @@ uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout = 0);
 char ssid[] = "\"Delford-PC_Network\"";
 char password[] = "\"dv8d-dy5r-pj16\"";
 
-char server[] = "192.168.1.106";
+char server[] = "192.168.1.101";
 
 char port[] = "3000";
 
@@ -23,12 +23,11 @@ void setup() {
 }
 
 void loop() {
-  char line[50];
+  char line[200];
 
-  readline(line, 50);
+  readline(line, 200);
 
-//  updateServer(line);
-Serial.println(line);
+  updateServer(line);
 }
 
 uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout)
@@ -48,7 +47,7 @@ uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout)
 
     while (HC12->available())
     {
-      //      Serial.println("c=HC12.read()");
+//            Serial.println("c=HC12.read()");
       char c =  HC12->read();
       //Serial.print(c, HEX); Serial.print("#"); Serial.println(c);
 
@@ -81,7 +80,7 @@ uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout)
 void updateServer(char* data)
 {
   esp->begin(9600);
-  char body[70];
+  char body[230]; //70
   strcpy(body, "{\"data\":\"");
   strcat(body, data);
   strcat(body, "\"}");
