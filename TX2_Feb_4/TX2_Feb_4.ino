@@ -23,7 +23,7 @@ long minVal[15] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 long maxi, mini;
 long i = 0;
 
-char deviceID[] = "6";
+char deviceID[] = "5";
 
 void heartRateSensorSetup() {
   particleSensor.begin(Wire, I2C_SPEED_FAST); //Use default I2C port, 400kHz speed
@@ -129,6 +129,7 @@ float temperature() {
   int  val = analogRead(tempPin);
   float mv = (val / 1023.0) * 5000;
   float cel = mv / 10;
+//  delay(100);
   return cel;
 }
 

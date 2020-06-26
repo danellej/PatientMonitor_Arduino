@@ -13,7 +13,7 @@ uint8_t readline(char *buff, uint8_t maxbuff, uint16_t timeout = 0);
 char ssid[] = "\"Delford-PC_Network\"";
 char password[] = "\"dv8d-dy5r-pj16\"";
 
-char server[] = "192.168.1.101";
+char server[] = "192.168.1.128";
 
 char port[] = "3000";
 

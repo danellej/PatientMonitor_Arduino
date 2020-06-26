@@ -15,7 +15,8 @@ void setup() {
 }
 
 void loop() {
-  sendNum();
+//  sendNum();
+  accelerometer();
 }
 
 void sendNum()

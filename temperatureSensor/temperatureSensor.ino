@@ -1,7 +1,7 @@
 #include <math.h>
 
 int val;
-int tempPin = 5;
+int tempPin = 2;
 
 char data[100];
 float myFloat = 99.9911;
@@ -17,6 +17,6 @@ void loop() {
   Serial.print("Temp: "); Serial.println(cel);
   delay(100);
 
-  dtostrf(cel, 4, 2, data);
-  Serial.print("String version: "); Serial.println(data);
+//  dtostrf(cel, 4, 2, data);
+//  Serial.print("String version: "); Serial.println(data);
 }
