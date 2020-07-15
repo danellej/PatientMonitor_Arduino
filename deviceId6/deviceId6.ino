@@ -23,7 +23,7 @@ long minVal[15] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 long maxi, mini;
 long i = 0;
 
-char deviceID[] = "5";
+char deviceID[] = "6";
 
 void heartRateSensorSetup() {
   particleSensor.begin(Wire, I2C_SPEED_FAST); //Use default I2C port, 400kHz speed
@@ -147,7 +147,7 @@ int accelerometer() {
 
   if (micro_is_5V) // microcontroller runs off 5V
   {
-    scaledZ = mapf(rawZ, 0, 675, -scale, scale); // 3.3/5 * 1023 =~ 675
+    scaledZ = mapf(rawZ, 0, 750, -scale, scale); // 3.3/5 * 1023 =~ 675
   }
   else // microcontroller runs off 3.3V
   {

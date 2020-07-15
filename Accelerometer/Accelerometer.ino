@@ -48,20 +48,20 @@ void loop()
   }
 
   // Print out raw X,Y,Z accelerometer readings
-  Serial.print("X: "); Serial.print(rawX);
+//  Serial.print("X: "); Serial.print(rawX);
 
   // Print out scaled X,Y,Z accelerometer readings
-  Serial.print(" X: "); Serial.print(scaledX); Serial.print(" g");
+//  Serial.print(" X: "); Serial.print(scaledX); Serial.print(" g");
 
-  Serial.print("    Y: "); Serial.print(rawY);
-
-  // Print out scaled X,Y,Z accelerometer readings
-  Serial.print("Y: "); Serial.print(scaledY); Serial.print(" g");
-
-  Serial.print("    Z: "); Serial.print(rawZ);
+//  Serial.print("    Y: "); Serial.print(rawY);
 
   // Print out scaled X,Y,Z accelerometer readings
-  Serial.print("Z: "); Serial.print(scaledZ); Serial.println(" g");
+//  Serial.print("Y: "); Serial.print(scaledY); Serial.print(" g");
+
+//  Serial.print("    Z: "); Serial.print(rawZ);
+
+  // Print out scaled X,Y,Z accelerometer readings
+//  Serial.print("Z: "); Serial.print(scaledZ); Serial.println(" g");
 
   delay(100);
 
